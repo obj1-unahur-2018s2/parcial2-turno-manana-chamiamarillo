@@ -1,21 +1,29 @@
 import actividades.*
-
-
+import socios.*
 
 describe "parcial 2" {
 	const colon = new ViajeDePlaya()
+	const playa1 = new ViajeDePlaya() // 1000 metros
+	const playa2 = new ViajeDePlaya() // 2000 metros
 	const parana = new ExcurcionCiudad()
 	const marDelPlata = new ExcurcionCiudadTropical()
 	const cordoba = new Trekking()
+	const roque = new SocioRelajado()
 	
 	fixture {
 		parana.atraccionesAVisitar(4)
 		marDelPlata.atraccionesAVisitar(10)
 		colon.largoPlaya(1500)
+		playa1.largoPlaya(1000)
+		playa2.largoPlaya(2000)
 		cordoba.diasSol(130)
 		cordoba.kmsSendero(250)
 		cordoba.agregarIdioma("español")
 		cordoba.agregarIdioma("ingles")
+		roque.maximoActividades(2)
+		roque.realizaActividad(playa1)
+		roque.realizaActividad(playa2)
+		
 	}
 	
 	test "viaje playa COLON si implica esfuerzo y siver para broncearse" {
@@ -55,5 +63,17 @@ describe "parcial 2" {
 	
 	test "viaje trekking CORDOBA no es interesante" {
 		assert.notThat(cordoba.esInteresante())
+	}
+	
+	test "roque es adorador del sol" {
+		assert.that(roque.adoradorDelSol())
+	}
+	
+	test "roque no se puede registra a clase de gimnasia" {
+		assert.throwsException({ roque.realizaActividad()})
+	}
+	
+	test "roque actividad esforzada" {
+		assert.equals(#{playa2},roque.implicaEsfuerzo())
 	}
 }

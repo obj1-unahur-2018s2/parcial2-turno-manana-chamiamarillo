@@ -1,4 +1,4 @@
-import actividadesSinViaje.*
+import socios.*
 
 class Viaje {
 	var property idioma = #{}
@@ -83,6 +83,22 @@ class Trekking inherits Viaje {
 	override method esInteresante() {
 		return (super() and (self.diasSol() > 140))
 	}
+}
+
+class Gimnasia {
+	var property idioma = #{"español"}
+	
+	method diasActividad() {
+		return 1
+	}
+	method implicaEsfuerzo() {
+		return true
+	}
+	method sirveBroncearse() {
+		return false
+	}
+	method esInteresante()
+	
 }
 
 

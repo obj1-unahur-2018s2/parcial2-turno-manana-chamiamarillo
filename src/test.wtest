@@ -12,6 +12,10 @@ describe "parcial 2" {
 	const roque = new SocioRelajado()
 	const maxi = new SocioTranquilo()
 	const pilate = new Gimnasia()
+	const pepita = new Libro()
+	const dog = new Libro()
+	const coco = new Libro()
+	const unahur = new TallerLiterario()
 	
 	fixture {
 		parana.atraccionesAVisitar(4)
@@ -32,7 +36,20 @@ describe "parcial 2" {
 		roque.agregarIdioma("español")
 		roque.agregarIdioma("frances")
 		roque.edad(39)
-		
+		//libros
+		pepita.cantPaginas(480)
+		pepita.idiomaLibro("español")
+		pepita.autor("julio")
+		dog.cantPaginas(125)
+		dog.idiomaLibro("ingles")
+		dog.autor("julio")
+		coco.cantPaginas(380)
+		coco.idiomaLibro("español")
+		coco.autor("julio")
+		//
+		unahur.agregarLibroTrabajado(pepita)
+		unahur.agregarLibroTrabajado(dog)
+		unahur.agregarLibroTrabajado(coco)
 	}
 	
 	test "viaje playa COLON si implica esfuerzo y siver para broncearse" {
@@ -98,7 +115,20 @@ describe "parcial 2" {
 	}
 	
 	test "santafe es recomendable para maxi" {
-
 		assert.that(santafe.esRecomendable(maxi))
+	}
+	
+	test "implica esfuerzo en el taller literario" {
+		assert.that(unahur.implicaEsfuerzo())
+	}
+	
+	test "4 dias actividad del taller literario" {
+		assert.equals(4,unahur.diasActividad())
+	}
+	
+	test "taller literario recomendable para maxi" {
+		maxi.agregarIdioma("español")
+		
+		assert.notThat(unahur.esRecomendable(maxi))
 	}
 }

@@ -29,7 +29,7 @@ class Socio {
 		return actividadRealizada.filter({ a => a.implicaEsfuerzo() })
 	}
 	
-	method agregarIidioma(_idioma) {
+	method agregarIdioma(_idioma) {
 		idiomaQHabla.add(_idioma)
 	}
 	

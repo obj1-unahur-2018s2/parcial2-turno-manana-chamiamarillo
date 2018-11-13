@@ -13,6 +13,13 @@ class Viaje {
 	method esInteresante() {
 		return (idioma.size() > 2)
 	}
+	
+	method esRecomendable(_socio) {
+		return (self.esInteresante() and 
+			_socio.actividadQLeAtrae(self) 
+			and not _socio.actividadRealizada().contains(self)
+		)
+	}
 }
 
 class ViajeDePlaya inherits Viaje {
@@ -97,10 +104,40 @@ class Gimnasia {
 	method sirveBroncearse() {
 		return false
 	}
-	method esInteresante()
 	
+	method esRecomendable(_socio) {
+		return (_socio.edad().between(20,30))
+	}
 }
 
+class TallerLiterario {
+	var property registroLibrosTrabajados = #{}
+	var property cantPaginas
+	var property idiomaLibro
+	var property autor
+	
+	method agregarLibroTrabajado(_libro) {
+		registroLibrosTrabajados.add(_libro)
+	}
+	
+	method idioma() {
+		return registroLibrosTrabajados.filter({ l => l.idioma()})
+	}
+	
+	method diasActividad() {
+		return (registroLibrosTrabajados.size() + 1)
+	}
+	
+	method sirveBroncearse() {
+		return false
+	}
+	
+	method implicaEsfuerzo() {
+		return ((registroLibrosTrabajados.size() > 1) and (registroLibrosTrabajados.) or 
+			(registroLibrosTrabajados.all({ l => l.cantPaginas() > 500 }))
+		)
+	}
+}
 
 
 

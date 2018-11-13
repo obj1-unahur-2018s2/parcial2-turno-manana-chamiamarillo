@@ -6,9 +6,12 @@ describe "parcial 2" {
 	const playa1 = new ViajeDePlaya() // 1000 metros
 	const playa2 = new ViajeDePlaya() // 2000 metros
 	const parana = new ExcurcionCiudad()
+	const santafe = new ExcurcionCiudad()
 	const marDelPlata = new ExcurcionCiudadTropical()
 	const cordoba = new Trekking()
 	const roque = new SocioRelajado()
+	const maxi = new SocioTranquilo()
+	const pilate = new Gimnasia()
 	
 	fixture {
 		parana.atraccionesAVisitar(4)
@@ -20,9 +23,15 @@ describe "parcial 2" {
 		cordoba.kmsSendero(250)
 		cordoba.agregarIdioma("español")
 		cordoba.agregarIdioma("ingles")
+		santafe.atraccionesAVisitar(8)
+		santafe.idioma("español")
+		santafe.idioma("aleman")
 		roque.maximoActividades(2)
 		roque.realizaActividad(playa1)
 		roque.realizaActividad(playa2)
+		roque.agregarIdioma("español")
+		roque.agregarIdioma("frances")
+		roque.edad(39)
 		
 	}
 	
@@ -75,5 +84,21 @@ describe "parcial 2" {
 	
 	test "roque actividad esforzada" {
 		assert.equals(#{playa2},roque.implicaEsfuerzo())
+	}
+	
+	test "roque le atrae cordoba y no colon" {
+		colon.agregarIdioma("aleman")
+		
+		assert.that(roque.actividadQLeAtrae(cordoba))
+		assert.notThat(roque.actividadQLeAtrae(colon))
+	}
+	
+	test "clase de gimnacia no recomendada para roque" {
+		assert.notThat(pilate.esRecomendable(roque))
+	}
+	
+	test "santafe es recomendable para maxi" {
+
+		assert.that(santafe.esRecomendable(maxi))
 	}
 }

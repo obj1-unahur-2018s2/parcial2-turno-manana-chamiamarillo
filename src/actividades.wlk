@@ -112,9 +112,6 @@ class Gimnasia {
 
 class TallerLiterario {
 	var property registroLibrosTrabajados = #{}
-	var property cantPaginas
-	var property idiomaLibro
-	var property autor
 	
 	method agregarLibroTrabajado(_libro) {
 		registroLibrosTrabajados.add(_libro)
@@ -133,11 +130,21 @@ class TallerLiterario {
 	}
 	
 	method implicaEsfuerzo() {
-		return ((registroLibrosTrabajados.size() > 1) and (registroLibrosTrabajados.) or 
-			(registroLibrosTrabajados.all({ l => l.cantPaginas() > 500 }))
+		return ((registroLibrosTrabajados.any({ l => l.cantPaginas() > 500 })) or
+			registroLibrosTrabajados.map({ a => a.autor() }).asSet().size() == 1 and
+			registroLibrosTrabajados.size() > 1
 		)
+	}
+	
+	method esRecomendable(_socio) {
+		return _socio.idiomaQHabla().size() > 1
+		
 	}
 }
 
-
+class Libro {
+	var property cantPaginas
+	var property idiomaLibro
+	var property autor
+}
 

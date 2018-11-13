@@ -1,0 +1,59 @@
+import actividades.*
+
+
+
+describe "parcial 2" {
+	const colon = new ViajeDePlaya()
+	const parana = new ExcurcionCiudad()
+	const marDelPlata = new ExcurcionCiudadTropical()
+	const cordoba = new Trekking()
+	
+	fixture {
+		parana.atraccionesAVisitar(4)
+		marDelPlata.atraccionesAVisitar(10)
+		colon.largoPlaya(1500)
+		cordoba.diasSol(130)
+		cordoba.kmsSendero(250)
+		cordoba.agregarIdioma("español")
+		cordoba.agregarIdioma("ingles")
+	}
+	
+	test "viaje playa COLON si implica esfuerzo y siver para broncearse" {
+		assert.that(colon.implicaEsfuerzo())
+		assert.that(colon.sirveBroncearse())
+	}	
+	
+	test "viaje playa COLON cuantos dias de actividad tres" {
+		assert.equals(3,colon.diasActividad())
+	}	
+	
+	test "viaje ciudad normal PARANA no implica esfuerzo no sibe el bronceo" {
+		assert.notThat(parana.implicaEsfuerzo())
+		assert.notThat(parana.sirveBroncearse())
+	}	
+	
+	test "viaje ciudad normal PARANA cuantos dias de actividad dos" {
+		assert.equals(2,parana.diasActividad())
+	}
+	
+	test "viaje ciudad MAR DEL PLATA TROPICA implica esfuerzo sibe el bronceo" {
+		assert.notThat(marDelPlata.implicaEsfuerzo())
+		assert.that(marDelPlata.sirveBroncearse())
+	}		
+	
+	test "viaje ciudad MAR DEL PLATA TROPICAL dias de actividad seis" {
+		assert.equals(6,marDelPlata.diasActividad())		
+	}
+	
+	test "viaje trekking CORDOBA implica esfuerzo" {
+		assert.that(cordoba.implicaEsfuerzo())
+	}
+	
+	test "viaje trekking CORDOBA dias de actividad cinco" {
+		assert.equals(5,cordoba.diasActividad())
+	}	
+	
+	test "viaje trekking CORDOBA no es interesante" {
+		assert.notThat(cordoba.esInteresante())
+	}
+}
